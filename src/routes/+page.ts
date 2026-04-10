@@ -18,6 +18,5 @@ interface Config {
 export async function load({ fetch }): PageLoad {
     const config = await fetch("/config.json")
         .then(response => response.json() as Config)
-    console.log(config)
     return { config }
 };

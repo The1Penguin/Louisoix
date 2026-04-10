@@ -1,0 +1,15 @@
+.svelte-kit
+.vscode
+build
+node_modules
+data
+.dockerignore
+.gitignore
+.npmrc
+.prettierignore
+.prettierrc
+eslint.config.js
+README.md
+flake.nix
+flake.lock
+.direnv
