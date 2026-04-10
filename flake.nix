@@ -23,27 +23,21 @@
       in {
         packages = rec {
             site-src = pkgs.stdenv.mkDerivation rec {
-            name = "${packageJSON.name}-site-${version}";
-            version = packageJSON.version;
-            src = gitignoreSource ./.;
-            nativeBuildInputs = with pkgs; [ yarnConfigHook yarnBuildHook yarnInstallHook nodejs yarn ];
-            yarnOfflineCache = pkgs.fetchYarnDeps {
-              yarnLock = src + "/yarn.lock";
-              hash = "sha256-Go4/7OOhx6GfAEYVRWKuqN0IVcRrcgGr9PkET/P0jns=";
+                name = "${packageJSON.name}-site-${version}";
+                version = packageJSON.version;
+                src = gitignoreSource ./.;
+                nativeBuildInputs = with pkgs; [ yarnConfigHook yarnBuildHook yarnInstallHook nodejs yarn ];
+                yarnOfflineCache = pkgs.fetchYarnDeps {
+                yarnLock = src + "/yarn.lock";
+                hash = "sha256-NBV6nALa5ycffxLXy4ArfHn3o/jdxYEUO7z+EK/7Wnk=";
+                };
             };
-            installPhase = ''
-                runHook preInstall
-                mkdir -p $out/build
-                cp -r build/* $out/build/
-                runHook postInstall
-            '';
-          };
 
           default = pkgs.writeShellApplication {
             name = packageJSON.name;
-            runtimeInputs = [site-src pkgs.python3];
+            runtimeInputs = [site-src pkgs.nodejs];
             text = ''
-              python -m http.server 8000 -d ${site-src}/build
+                ORIGIN='http://localhost:3000' node build --enable-source-maps
             '';
           };
         };
