@@ -1,4 +1,3 @@
-import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 interface Link {
@@ -16,7 +15,7 @@ interface Config {
     categories: [Category];
 }
 
-export async function load({ fetch, params }): PageLoad {
+export async function load({ fetch }): PageLoad {
     const config = await fetch("/config.json")
         .then(response => response.json() as Config)
     console.log(config)

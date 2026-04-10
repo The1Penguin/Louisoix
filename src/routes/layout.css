@@ -1,2 +1,12 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+
+body {
+    background-color: var(--color-fuchsia-50)
+}
+
+@media (prefers-color-scheme: dark){
+    body {
+        background-color: var(--color-gray-800)
+    }
+}
