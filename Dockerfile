@@ -1,4 +1,4 @@
-FROM node:24.14.1-alpine AS base
+FROM node:26.12.1-alpine AS base
 ENV NODE_ENV=production
 
 FROM base AS deps
